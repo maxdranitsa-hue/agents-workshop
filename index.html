@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Воркшоп · AI-агенты для бизнеса · Москва · 8 Digital</title>
+<meta name="description" content="Авторский воркшоп Максима Драницы. За 8 часов соберём три рабочих AI-агента под ваши бизнес-задачи — без промптов, голосом. Москва, офлайн." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Manrope', 'sans-serif'],
+        },
+        colors: {
+          paper: '#FAFAF7',
+          warm:  '#F2F1EC',
+          ink:   '#0A0B12',
+          ink2:  '#1F2230',
+          mute:  '#6B7280',
+          line:  'rgba(10,11,18,0.08)',
+          brand: '#E5142A',
+          accent:'#0A0B12',
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #FAFAF7;
+    color: #0A0B12;
+    overflow-x: hidden;
+  }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: .08s; }
+  .reveal-d2 { transition-delay: .16s; }
+  .reveal-d3 { transition-delay: .24s; }
+
+  /* Section tag — minimal, atsyhan style */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid rgba(10,11,18,0.10);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    color: #4B5563;
+  }
+  .tag-dot {
+    width: 6px; height: 6px; border-radius: 9999px; background: #E5142A;
+  }
+
+  /* Card — minimal Tilda-like */
+  .card {
+    background: #ffffff;
+    border: 1px solid rgba(10,11,18,0.08);
+    border-radius: 20px;
+    padding: 32px;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(10,11,18,0.10);
+    border-color: rgba(10,11,18,0.15);
+  }
+
+  /* Big number h-style */
+  .num {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+  }
+
+  /* Hero subtle dot pattern */
+  .dot-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(10,11,18,0.10) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  /* Underline marker accent */
+  .marker {
+    position: relative;
+    display: inline-block;
+  }
+  .marker::after {
+    content: '';
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: 8%;
+    height: 38%;
+    background: rgba(229,20,42,0.18);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  /* Faux-chat for sales agent demo */
+  .chat {
+    background: #ffffff;
+    border: 1px solid rgba(10,11,18,0.08);
+    border-radius: 24px;
+    padding: 24px;
+    max-width: 460px;
+  }
+  .bubble-bot {
+    background: #F2F1EC;
+    border-radius: 16px 16px 16px 4px;
+    padding: 14px 16px;
+    font-size: 14px;
+    max-width: 90%;
+  }
+  .bubble-user {
+    background: #0A0B12;
+    color: #ffffff;
+    border-radius: 16px 16px 4px 16px;
+    padding: 14px 16px;
+    font-size: 14px;
+    max-width: 80%;
+    margin-left: auto;
+  }
+  @keyframes typing { 0%,60%,100% { opacity: 0.2; } 30% { opacity: 1; } }
+  .typing-dot { width: 6px; height: 6px; border-radius: 9999px; background: #6B7280; display: inline-block; animation: typing 1.4s infinite; }
+  .typing-dot:nth-child(2) { animation-delay: .2s; }
+  .typing-dot:nth-child(3) { animation-delay: .4s; }
+
+  /* Pricing tier highlight */
+  .tier-recommended {
+    background: #0A0B12;
+    color: #ffffff;
+    border-color: #0A0B12;
+    position: relative;
+  }
+  .tier-recommended .tier-cta {
+    background: #ffffff;
+    color: #0A0B12;
+  }
+
+  /* FAQ */
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform .3s ease; }
+
+  input:focus, button:focus, select:focus { outline: none; }
+
+  /* Subtle vertical rule between stat columns */
+  .rule-r { position: relative; }
+  .rule-r::after { content: ''; position: absolute; right: 0; top: 12%; bottom: 12%; width: 1px; background: rgba(10,11,18,0.10); }
+  @media (max-width: 768px) { .rule-r::after { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<header class="border-b border-line bg-paper/80 backdrop-blur-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center">
+      <img src="logos/8digital-dark.svg" alt="8 Digital" class="h-7 w-auto">
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-mute">
+      <a href="#agents" class="hover:text-ink transition">Что заберёте</a>
+      <a href="#program" class="hover:text-ink transition">Программа</a>
+      <a href="#speaker" class="hover:text-ink transition">Кто ведёт</a>
+      <a href="#pricing" class="hover:text-ink transition">Тарифы</a>
+    </nav>
+    <a href="#cta" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink text-white text-sm font-semibold hover:scale-[1.02] transition">
+      Записаться
+    </a>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 dot-bg opacity-50 pointer-events-none" style="-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);"></div>
+
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-16">
+    <div class="reveal">
+      <span class="tag mb-8">
+        <span class="tag-dot"></span>
+        Автоматизация бизнеса через AI-агентов · Москва · Офлайн
+      </span>
+
+      <h1 class="mt-8 text-[44px] xs:text-[56px] md:text-[80px] lg:text-[104px] font-bold leading-[0.96] tracking-[-0.04em] max-w-5xl">
+        День практики.<br>
+        Автоматизация бизнеса<br>
+        через <span class="marker">AI-агентов</span>
+      </h1>
+
+      <p class="mt-8 text-lg md:text-2xl font-medium leading-[1.45] max-w-3xl text-ink2">
+        К вечеру у вас в ноутбуке — три готовых AI-агента под ваши бизнес-задачи: <strong>агент-продавец</strong>, <strong>AI-офис-менеджер</strong>, <strong>разработка без кода</strong>. Без сложных промптов, голосом.
+      </p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="reveal reveal-d1 mt-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0 border-t border-b border-line py-10">
+      <div class="md:px-6 rule-r">
+        <div class="text-xs uppercase tracking-widest text-mute font-semibold">Когда</div>
+        <div class="mt-3 text-2xl md:text-3xl font-bold num">Дата уточняется</div>
+        <div class="mt-1 text-sm text-mute">Анонсируем за 2 недели</div>
+      </div>
+      <div class="md:px-6 rule-r">
+        <div class="text-xs uppercase tracking-widest text-mute font-semibold">Формат</div>
+        <div class="mt-3 text-2xl md:text-3xl font-bold">Практика</div>
+        <div class="mt-1 text-sm text-mute">Со своего ноутбука</div>
+      </div>
+      <div class="md:px-6 rule-r">
+        <div class="text-xs uppercase tracking-widest text-mute font-semibold">Места</div>
+        <div class="mt-3 text-2xl md:text-3xl font-bold num">20 за партой</div>
+        <div class="mt-1 text-sm text-mute">Камерная группа</div>
+      </div>
+      <div class="md:px-6">
+        <div class="text-xs uppercase tracking-widest text-mute font-semibold">Где</div>
+        <div class="mt-3 text-2xl md:text-3xl font-bold">Москва, центр</div>
+        <div class="mt-1 text-sm text-mute">Площадка уточняется</div>
+      </div>
+    </div>
+
+    <p class="reveal reveal-d2 mt-8 text-base text-ink2 max-w-2xl">
+      Лектор и ассистенты — лично помогают на вашем ноутбуке.
+    </p>
+
+    <div class="reveal reveal-d2 mt-8 flex flex-wrap gap-3">
+      <a href="#cta" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-ink text-white font-semibold hover:scale-[1.02] transition">
+        Записаться на воркшоп
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#agents" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white border border-line text-ink font-semibold hover:bg-warm transition">
+        Что заберёте
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3 AGENTS — RESULT ============== -->
+<section id="agents" class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Результат · 3 агента</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Что вы <span class="marker">заберёте</span> вечером
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        Три готовых AI-агента, настроенных под ваши задачи. Запускаются в продакшене со следующего дня.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mt-14">
+      <div class="reveal card">
+        <div class="text-xs font-mono text-mute">01 / 03</div>
+        <div class="mt-3 text-4xl">💬</div>
+        <h3 class="mt-4 text-2xl md:text-3xl font-bold tracking-tight">AI-агент продаж</h3>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">
+          Сам пишет клиентам, ищет инфу, готовит коммерческие предложения, ведёт лида до сделки.
+        </p>
+        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
+          «Первый агент полностью продал предыдущий воркшоп, пока я был в командировке».
+          <div class="not-italic mt-2 font-semibold text-ink">— Максим Драница</div>
+        </blockquote>
+      </div>
+
+      <div class="reveal reveal-d1 card">
+        <div class="text-xs font-mono text-mute">02 / 03</div>
+        <div class="mt-3 text-4xl">📄</div>
+        <h3 class="mt-4 text-2xl md:text-3xl font-bold tracking-tight">AI-офис-менеджер</h3>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">
+          Сверните 10 Excel-таблиц в одну сводку. 30-страничный Word-документ и презентацию. Транскрибируйте совещание в структурный документ — одной командой голосом за 10 минут.
+        </p>
+        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
+          «За вечер сделал семь версий презентации. Дизайнер просил 50 000 ₽ только за одну».
+          <div class="not-italic mt-2 font-semibold text-ink">— Влад · собственник медклиники</div>
+        </blockquote>
+      </div>
+
+      <div class="reveal reveal-d2 card">
+        <div class="text-xs font-mono text-mute">03 / 03</div>
+        <div class="mt-3 text-4xl">🪟</div>
+        <h3 class="mt-4 text-2xl md:text-3xl font-bold tracking-tight">Разработка без кода</h3>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">
+          Готовый сложный технический продукт — внутренняя автоматизация или сервис для клиентов. Без АйТи-команды.
+        </p>
+        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
+          «Внутренняя CRM для отдела продаж, которую заказывали разработчикам за 2 млн — собрана за день, в продакшене».
+          <div class="not-italic mt-2 font-semibold text-ink">— Кейс 8 Digital</div>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AGENT 1 — SALES (with chat demo) ============== -->
+<section class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">AI-агент №1 · продажи</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        AI-агент продаж — <span class="marker">Лид</span>
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        Это наш AI-агент-продавец. Работает в реальном продакшене — мы ему доверяем сделки. Можете протестировать прямо сейчас — он расскажет о воркшопе и о цене.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_460px] gap-12 mt-14 items-start">
+      <!-- Capabilities -->
+      <div class="reveal flex flex-col gap-8">
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="card">
+            <div class="text-2xl font-bold tracking-tight">B2B</div>
+            <p class="mt-2 text-sm text-mute leading-relaxed">по базе товаров, готовит персональное КП</p>
+          </div>
+          <div class="card">
+            <div class="text-2xl font-bold tracking-tight">B2C</div>
+            <p class="mt-2 text-sm text-mute leading-relaxed">общается в директе и боте, ведёт до продажи</p>
+          </div>
+          <div class="card">
+            <div class="text-2xl font-bold tracking-tight">B2G</div>
+            <p class="mt-2 text-sm text-mute leading-relaxed">скорит тендеры, помогает с документами</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xs uppercase tracking-widest text-mute font-semibold mb-4">Каналы</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Telegram</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Instagram</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">WhatsApp</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">VK</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Email</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Сайт</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xs uppercase tracking-widest text-mute font-semibold mb-4">Возможные интеграции</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">1С</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Bitrix24</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">amoCRM</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">YCLIENTS</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">GetCourse</span>
+            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Tilda</span>
+          </div>
+        </div>
+
+        <div class="card border-brand/30">
+          <div class="text-4xl md:text-5xl font-bold tracking-tight num">2 500 000+ ₽</div>
+          <p class="mt-2 text-base text-ink2">за полгода работы — выручки на счёт от AI-агента</p>
+        </div>
+      </div>
+
+      <!-- Chat demo -->
+      <div class="reveal reveal-d2 chat">
+        <div class="flex items-center gap-3 pb-4 border-b border-line">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-ink to-ink2 flex items-center justify-center text-white font-bold">Л</div>
+          <div>
+            <div class="font-semibold text-sm">Лид · AI-агент</div>
+            <div class="text-xs text-mute">@leadagent_8digital_bot · <span class="text-emerald-600">Онлайн</span></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 py-4">
+          <div class="bubble-user">Расскажи про воркшоп</div>
+          <div class="bubble-bot">
+            День практики в Москве. К вечеру — три готовых AI-агента в вашем ноутбуке. Что для вас важнее: <strong>продажи</strong>, <strong>офис</strong> или <strong>своё приложение</strong>?
+          </div>
+          <div class="bubble-user">Продажи. У меня дистрибуция</div>
+          <div class="bubble-bot">
+            Тогда вы соберёте такого же меня под B2B. Подключим к 1С/amoCRM, обучим на вашем каталоге, на выходе — агент пишет КП и ведёт сделку. Скинуть программу дня?
+          </div>
+          <div class="flex items-center gap-2 text-mute text-xs">
+            <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
+            <span class="ml-1">печатает…</span>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-line flex items-center gap-2">
+          <input type="text" placeholder="Напишите сообщение…" disabled class="flex-1 px-4 py-2.5 rounded-full bg-warm border border-line text-sm placeholder-mute" />
+          <button class="w-10 h-10 rounded-full bg-ink text-white text-lg font-bold">↑</button>
+        </div>
+        <p class="mt-3 text-xs text-mute text-center">Это демо. Реальный агент собирается на воркшопе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AGENT 2 — OFFICE ============== -->
+<section class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">AI-агент №2 · офис</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        AI-офис-менеджер
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        Word, Excel, презентации, транскрибация совещаний — одной командой голосом превращаются в полноценные структурные документы по шаблону или вашему заданию.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-14">
+      <div class="card !p-6 flex flex-col gap-2">
+        <span class="text-xs font-mono text-mute">DOC</span>
+        <div class="text-base font-semibold mt-1">Сделай регламент по этому брифу</div>
+      </div>
+      <div class="card !p-6 flex flex-col gap-2">
+        <span class="text-xs font-mono text-mute">XLS</span>
+        <div class="text-base font-semibold mt-1">Сведи 5 эксельников в одну сводку</div>
+      </div>
+      <div class="card !p-6 flex flex-col gap-2">
+        <span class="text-xs font-mono text-mute">PPT</span>
+        <div class="text-base font-semibold mt-1">Презентация на 7 слайдов из этой записки</div>
+      </div>
+      <div class="card !p-6 flex flex-col gap-2">
+        <span class="text-xs font-mono text-mute">REC</span>
+        <div class="text-base font-semibold mt-1">Транскрибируй совещание в структурный документ</div>
+      </div>
+      <div class="card !p-6 flex flex-col gap-2">
+        <span class="text-xs font-mono text-mute">DOC</span>
+        <div class="text-base font-semibold mt-1">Переоформи договор: новые реквизиты</div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+      <div class="card">
+        <div class="text-3xl">🏭</div>
+        <h4 class="mt-4 text-lg font-bold">Производство и торговля</h4>
+        <p class="mt-2 text-sm text-mute leading-relaxed">реквизиты, консолидация Excel, договоры</p>
+      </div>
+      <div class="card">
+        <div class="text-3xl">✂️</div>
+        <h4 class="mt-4 text-lg font-bold">Салоны и клиники</h4>
+        <p class="mt-2 text-sm text-mute leading-relaxed">отчёты по точкам, чек-листы администраторам</p>
+      </div>
+      <div class="card">
+        <div class="text-3xl">🧮</div>
+        <h4 class="mt-4 text-lg font-bold">Бухгалтерия и финдир</h4>
+        <p class="mt-2 text-sm text-mute leading-relaxed">выписки, поиск расхождений, эквайринг</p>
+      </div>
+      <div class="card">
+        <div class="text-3xl">📣</div>
+        <h4 class="mt-4 text-lg font-bold">Маркетологи</h4>
+        <p class="mt-2 text-sm text-mute leading-relaxed">коммерческие предложения и презентации за вечер</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AGENT 3 — CUSTOM SERVICE ============== -->
+<section class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">AI-агент №3 · сервис</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Готовый <span class="marker">сервис</span> под вашу задачу
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        Готовый сложный технический продукт — внутренняя автоматизация или софт для клиентов. <strong>Работающий продукт</strong>, не прототип. Без АйТи-команды, не программистам.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-5 mt-14">
+      <div class="reveal card">
+        <span class="tag">Флагман-кейс · в продакшене</span>
+        <h3 class="mt-6 text-3xl md:text-4xl font-bold tracking-tight">Платформа 8 Digital</h3>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">
+          Корпоративный кабинет с ChatGPT, Claude, Gemini и Perplexity в одном окне за токены. Конкурент GPTunneL B2B. Написал сам через Claude Code за несколько недель — без АйТи-команды.
+        </p>
+        <div class="mt-6 grid grid-cols-3 gap-4 pt-6 border-t border-line">
+          <div>
+            <div class="text-3xl font-bold num">4</div>
+            <div class="text-xs text-mute mt-1">нейросети<br>в одном окне</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold num">1</div>
+            <div class="text-xs text-mute mt-1">человек<br>в команде</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold num">B2B</div>
+            <div class="text-xs text-mute mt-1">платящие<br>клиенты</div>
+          </div>
+        </div>
+        <div class="mt-6 text-xs text-mute font-mono">
+          Stack: Claude (приложение и Claude Code) + Vercel + Stripe + voice-control
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1 flex flex-col gap-4">
+        <div class="card">
+          <span class="text-xs font-mono text-mute">A</span>
+          <h4 class="mt-3 text-xl font-bold">Внутренняя система учёта под вашу нишу</h4>
+          <p class="mt-2 text-sm text-mute leading-relaxed">CRM, реестры, складская автоматизация — собираем за день, без подрядчика.</p>
+        </div>
+        <div class="card">
+          <span class="text-xs font-mono text-mute">B</span>
+          <h4 class="mt-3 text-xl font-bold">Система обучения / онбординга персонала</h4>
+          <p class="mt-2 text-sm text-mute leading-relaxed">База знаний, проверка знаний, прогресс сотрудников — ваш собственный LMS.</p>
+        </div>
+        <div class="card">
+          <span class="text-xs font-mono text-mute">C</span>
+          <h4 class="mt-3 text-xl font-bold">Сервис для ваших клиентов</h4>
+          <p class="mt-2 text-sm text-mute leading-relaxed">Личный кабинет, калькулятор услуг, чат с поддержкой на ИИ — готовый MVP.</p>
+        </div>
+        <div class="card border-brand/30">
+          <p class="text-base font-semibold">Берём вашу идею — собираем каркас за день.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BARRIERS ============== -->
+<section class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Боль · честно</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Почему автоматизация<br>не работает <span class="marker">сейчас</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mt-14">
+      <div class="reveal card">
+        <div class="text-xs font-mono text-mute">Барьер 01</div>
+        <div class="mt-3 text-4xl">📉</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Крах завышенных ожиданий</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">
+          Прочитал 50 постов про ИИ — и всё ещё не знаешь, с чего начать. Между «магия» и «работающий процесс» — большая дистанция. Но преодолимая. На воркшопе мы её преодолеем.
+        </p>
+      </div>
+      <div class="reveal reveal-d1 card">
+        <div class="text-xs font-mono text-mute">Барьер 02</div>
+        <div class="mt-3 text-4xl">📚</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Информационный паралич</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">
+          Курсов и инструментов слишком много. Выбрать невозможно. Пробуем что-то одно — бросаем. На воркшопе — один инструмент. Фокус.
+        </p>
+      </div>
+      <div class="reveal reveal-d2 card">
+        <div class="text-xs font-mono text-mute">Барьер 03</div>
+        <div class="mt-3 text-4xl">🔧</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Технические барьеры</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">
+          VPN, аккаунты, подписки, доступы. Уходит вечер на установку — а воз и ныне там. Поэтому делаем оффлайн с живыми людьми рядом. Решаем весь технический геморрой за вас.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DAY MAP ============== -->
+<section id="program" class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Карта дня · 10:00–20:00</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Карта дня воркшопа
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        Площадка работает с 9:00 до 21:00. Приходите раньше — пьём кофе. Остаётесь после — отвечаем на уникальные вопросы.
+      </p>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-2 gap-5">
+      <div class="reveal card flex flex-col">
+        <div class="flex items-baseline justify-between mb-4">
+          <span class="num text-3xl md:text-4xl font-bold">10:00<span class="text-mute">→</span>12:30</span>
+          <span class="text-xs font-mono text-mute">БЛОК 01</span>
+        </div>
+        <h4 class="text-xl md:text-2xl font-bold">Старт и инфраструктура</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Устанавливаем все программы, разбираемся с интерфейсом, первая проба работы.</p>
+      </div>
+      <div class="reveal reveal-d1 card flex flex-col">
+        <div class="flex items-baseline justify-between mb-4">
+          <span class="num text-3xl md:text-4xl font-bold">12:30<span class="text-mute">→</span>14:30</span>
+          <span class="text-xs font-mono text-mute">БЛОК 02</span>
+        </div>
+        <h4 class="text-xl md:text-2xl font-bold">AI-офис-менеджер</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Word, Excel, PDF, презентации — одной командой. Шаблоны под ваши задачи, сохраняем как пресеты.</p>
+      </div>
+      <div class="reveal reveal-d1 card flex flex-col">
+        <div class="flex items-baseline justify-between mb-4">
+          <span class="num text-3xl md:text-4xl font-bold">14:30<span class="text-mute">→</span>17:00</span>
+          <span class="text-xs font-mono text-mute">БЛОК 03</span>
+        </div>
+        <h4 class="text-xl md:text-2xl font-bold">AI-агент продаж</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Делаем такого же Лида под ваш сегмент: B2B, B2C или B2G. Каналы, база, КП, интеграции.</p>
+      </div>
+      <div class="reveal reveal-d2 card flex flex-col">
+        <div class="flex items-baseline justify-between mb-4">
+          <span class="num text-3xl md:text-4xl font-bold">17:00<span class="text-mute">→</span>20:00</span>
+          <span class="text-xs font-mono text-mute">БЛОК 04</span>
+        </div>
+        <h4 class="text-xl md:text-2xl font-bold">Готовый сервис</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Берём вашу идею — собираем работающий каркас. Vibe-код + Claude Design + голосовое управление.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HOW IT GOES ============== -->
+<section class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Как проходит день</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Как проходит день в зале
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mt-14">
+      <div class="reveal card">
+        <div class="text-xs font-mono text-mute">01</div>
+        <div class="mt-3 text-4xl">🛡</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Технические барьеры — решаем сразу</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">VPN, аккаунты, подписки, доступы. На тарифе Premium всё преднастроено заранее.</p>
+      </div>
+      <div class="reveal reveal-d1 card">
+        <div class="text-xs font-mono text-mute">02</div>
+        <div class="mt-3 text-4xl">👥</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Лектор и ассистенты подходят лично</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Не просто слушаете — реально решаем под ваш экран. Помогаем нажать, разобраться, починить.</p>
+      </div>
+      <div class="reveal reveal-d2 card">
+        <div class="text-xs font-mono text-mute">03</div>
+        <div class="mt-3 text-4xl">🧭</div>
+        <h4 class="mt-4 text-xl md:text-2xl font-bold">Поможем выбрать задачу</h4>
+        <p class="mt-3 text-base text-ink2 leading-relaxed">Не знаете, что автоматизировать первым — разберём вашу ситуацию вместе и предложим конкретное решение.</p>
+      </div>
+    </div>
+
+    <p class="mt-10 text-center text-base text-mute">Внутри — отдельная LMS-платформа: инструкции под рукой, ваши заметки сохраняются.</p>
+  </div>
+</section>
+
+<!-- ============== TESTIMONIALS ============== -->
+<section class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Голоса · 6 выпускников</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Что говорят выпускники
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+      <div class="reveal card">
+        <div class="text-sm font-semibold">Александр К.</div>
+        <div class="text-xs text-mute">руководитель отдела продаж</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«На третий день после воркшопа Лид закрыл первую сделку».</p>
+      </div>
+      <div class="reveal reveal-d1 card">
+        <div class="text-sm font-semibold">Мария Д.</div>
+        <div class="text-xs text-mute">маркетолог</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«Семь коммерческих предложений за вечер — раньше делала по одному в неделю».</p>
+      </div>
+      <div class="reveal reveal-d2 card">
+        <div class="text-sm font-semibold">Иван П.</div>
+        <div class="text-xs text-mute">собственник</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«Запустил клиентский сервис за два дня — раньше думал, что это полгода и команда айтишников».</p>
+      </div>
+      <div class="reveal card">
+        <div class="text-sm font-semibold">Ольга В.</div>
+        <div class="text-xs text-mute">администратор сети салонов</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«Отчёты по 4 точкам автоматом — освободилось полдня в неделю».</p>
+      </div>
+      <div class="reveal reveal-d1 card">
+        <div class="text-sm font-semibold">Дмитрий С.</div>
+        <div class="text-xs text-mute">главный бухгалтер</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«Сверки и поиск расхождений — минуты вместо часов».</p>
+      </div>
+      <div class="reveal reveal-d2 card">
+        <div class="text-sm font-semibold">Анна Л.</div>
+        <div class="text-xs text-mute">финдир</div>
+        <p class="mt-4 text-base text-ink2 leading-relaxed">«Презентация для совета акционеров за час, а не за выходные».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== INDUSTRIES ============== -->
+<section class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Подходит · 6 индустрий</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Подходит вашему бизнесу
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-14">
+      <div class="reveal card !p-6"><div class="text-xs font-mono text-mute">.01</div><div class="mt-2 text-3xl">🚛</div><h4 class="mt-3 text-lg md:text-xl font-bold">Дистрибьюторы и оптовики</h4></div>
+      <div class="reveal reveal-d1 card !p-6"><div class="text-xs font-mono text-mute">.02</div><div class="mt-2 text-3xl">🏭</div><h4 class="mt-3 text-lg md:text-xl font-bold">Производство</h4></div>
+      <div class="reveal reveal-d2 card !p-6"><div class="text-xs font-mono text-mute">.03</div><div class="mt-2 text-3xl">💼</div><h4 class="mt-3 text-lg md:text-xl font-bold">B2B-услуги</h4></div>
+      <div class="reveal card !p-6"><div class="text-xs font-mono text-mute">.04</div><div class="mt-2 text-3xl">✂️</div><h4 class="mt-3 text-lg md:text-xl font-bold">B2C-услуги</h4></div>
+      <div class="reveal reveal-d1 card !p-6"><div class="text-xs font-mono text-mute">.05</div><div class="mt-2 text-3xl">🛍</div><h4 class="mt-3 text-lg md:text-xl font-bold">Розница</h4></div>
+      <div class="reveal reveal-d2 card !p-6"><div class="text-xs font-mono text-mute">.06</div><div class="mt-2 text-3xl">🧮</div><h4 class="mt-3 text-lg md:text-xl font-bold">Бухгалтерия и финансы</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SPEAKER ============== -->
+<section id="speaker" class="py-24 md:py-32">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Кто ведёт · solo</span>
+    </div>
+
+    <div class="reveal mt-8 grid lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 items-start">
+      <div class="card !p-5">
+        <div class="aspect-[4/5] rounded-2xl bg-warm bg-cover bg-center" style="background-image:url('speaker.jpg');"></div>
+        <h3 class="mt-5 text-2xl font-bold">Максим Драница</h3>
+        <p class="mt-2 text-sm text-mute leading-relaxed">в первую очередь — <strong class="text-ink">предприниматель</strong>, во вторую — тренер</p>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <p class="text-lg md:text-xl leading-relaxed text-ink2">
+          Все нововведения и технологии я в первую очередь тестирую на своём работающем бизнесе. Математика простая: <strong>если это не работает — я теряю деньги</strong> от основного актива. Поэтому вам я показываю только то, что у нас работает.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="card !p-5">
+            <div class="text-3xl font-bold num">17</div>
+            <div class="text-xs text-mute mt-1 leading-snug">лет в&nbsp;предпринимательстве</div>
+          </div>
+          <div class="card !p-5">
+            <div class="text-3xl font-bold num">100+</div>
+            <div class="text-xs text-mute mt-1 leading-snug">обученных команд<br>в&nbsp;корп. формате</div>
+          </div>
+          <div class="card !p-5">
+            <div class="text-3xl font-bold num">8</div>
+            <div class="text-xs text-mute mt-1 leading-snug">направлений автоматизации<br>в&nbsp;8 Digital</div>
+          </div>
+        </div>
+
+        <div class="card border-brand/30">
+          <div class="text-xs font-mono text-mute mb-3">Ключевое</div>
+          <p class="text-base leading-relaxed">
+            Смесь бизнес-экспертизы CEO и технологии. Не «тренер из бумаги», а собственник, который применяет ИИ на собственных проектах. <strong>То же самое на воркшопе:</strong> вы соберёте свой работающий продукт за день.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section id="pricing" class="bg-warm py-24 md:py-32 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Тарифы · 2 уровня</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+        Тарифы
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+        День воркшопа одинаковый — выбираете уровень сервиса. <strong>20 мест физически</strong>, зал не резиновый.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl">
+      <div class="reveal card flex flex-col">
+        <span class="text-xs uppercase tracking-widest text-mute font-semibold">Tier 01</span>
+        <h3 class="mt-3 text-3xl font-bold">Standard</h3>
+        <div class="mt-6 flex items-baseline gap-2">
+          <span class="text-5xl font-bold tracking-tight num">35 000 ₽</span>
+        </div>
+        <p class="mt-2 text-sm text-mute">Цена будет уточнена ближе к дате</p>
+        <ul class="mt-8 space-y-3 text-base flex-1">
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Базовое участие — все 4 блока программы</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Лектор и ассистенты в зале</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>LMS-платформа после воркшопа</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Стек настраиваете сами заранее</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Кофе-брейки и обед</li>
+        </ul>
+        <a href="#cta" class="tier-cta mt-8 inline-flex items-center justify-center px-6 py-4 rounded-full bg-warm border border-line text-ink font-semibold hover:bg-paper transition">
+          Выбрать этот тариф
+        </a>
+      </div>
+
+      <div class="reveal reveal-d1 card tier-recommended flex flex-col">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-brand text-white text-xs font-bold tracking-widest uppercase">Рекомендуем</span>
+        <span class="text-xs uppercase tracking-widest opacity-60 font-semibold">Tier 02 · Premium</span>
+        <h3 class="mt-3 text-3xl font-bold">Premium</h3>
+        <div class="mt-6 flex items-baseline gap-2">
+          <span class="text-5xl font-bold tracking-tight num">55 000 ₽</span>
+        </div>
+        <p class="mt-2 text-sm opacity-60">Цена будет уточнена ближе к дате</p>
+        <ul class="mt-8 space-y-3 text-base flex-1">
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Всё из тарифа Standard</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Оплаченный, зарегистрированный Claude-аккаунт</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Надёжный VPN под ваш ноутбук</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Личная сессия с Максимом по вашим задачам после</li>
+          <li class="flex gap-3"><span class="text-brand font-bold mt-0.5">·</span>Доступ к платформе 8 Digital на 1 месяц для всей компании</li>
+        </ul>
+        <a href="#cta" class="tier-cta mt-8 inline-flex items-center justify-center px-6 py-4 rounded-full font-semibold hover:scale-[1.02] transition">
+          Выбрать этот тариф
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal mt-10 max-w-5xl card !p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="font-bold text-lg">Для юридических лиц</div>
+        <p class="text-sm text-mute mt-1">Безналичные расчёты — договор, счёт, акт. Отправьте реквизиты в чат — оформим документы за день.</p>
+      </div>
+      <a href="#cta" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold text-sm hover:scale-[1.02] transition">
+        Написать в чат →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8">
+    <div class="reveal">
+      <span class="tag">Честные ответы</span>
+      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em]">
+        Честные ответы
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink2">Без маркетингового пафоса. Что вы реально получите, а что — нет.</p>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-3">
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Магия будет?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">Магии не обещаем. Обещаем 8 часов практики и три рабочих AI-агента на выходе.</p>
+      </details>
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Я сам не справлюсь?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">Справитесь. Только уйдут ~50 часов проб и ошибок. С нами — 8 часов и работающий ноутбук вечером.</p>
+      </details>
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Что именно я буду автоматизировать?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">Ваши задачи. В первый блок дня мы разбираем индивидуально, что у вас сейчас «съедает» время — это и автоматизируем. Если не знаете — поможем выбрать.</p>
+      </details>
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Можно прийти без подготовки?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">На тарифе Premium — да, всё преднастроено заранее. На Standard — настраиваете стек сами по нашей инструкции (1–2 часа вечером накануне).</p>
+      </details>
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Что брать с собой?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">Ноутбук с зарядкой, рабочий телефон, доступы к корпоративной почте и CRM (если хотите интегрировать). Кофе и обед — наши.</p>
+      </details>
+      <details class="reveal card">
+        <summary class="flex items-start justify-between gap-4">
+          <h4 class="text-lg md:text-xl font-bold">Если не подойдёт — вернёте деньги?</h4>
+          <span class="faq-icon shrink-0 w-7 h-7 rounded-full bg-warm flex items-center justify-center text-lg leading-none">+</span>
+        </summary>
+        <p class="mt-4 text-ink2 leading-relaxed">До утра воркшопа — 100% возврат без вопросов. После начала — место можно передать коллеге, деньги уже не возвращаем (зал, кофе, ассистенты оплачены).</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section id="cta" class="relative bg-ink text-white py-24 md:py-32 overflow-hidden">
+  <div class="absolute inset-0 dot-bg opacity-20 pointer-events-none" style="background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.18) 1px,transparent 1.5px);"></div>
+
+  <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center reveal">
+    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/25 text-xs font-bold tracking-widest uppercase">
+      <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+      20 мест · Москва · Дата уточняется
+    </span>
+
+    <h2 class="mt-8 text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.04] tracking-[-0.03em]">
+      К вечеру у вас в&nbsp;ноутбуке —<br>
+      <span class="opacity-60">три рабочих AI-агента</span>
+    </h2>
+
+    <p class="mt-8 text-lg md:text-xl opacity-80 max-w-2xl mx-auto">Оставьте контакты — позвоним, расскажем формат, забронируем место и пришлём счёт.</p>
+
+    <form class="mt-10 max-w-xl mx-auto flex flex-col gap-3" data-lead-form>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input name="name" type="text" required placeholder="Имя" class="flex-1 px-5 py-4 rounded-full bg-white/10 border border-white/15 placeholder-white/40 text-white text-sm font-medium focus:border-white/30 transition">
+        <input name="phone" type="tel" required placeholder="Телефон" class="flex-1 px-5 py-4 rounded-full bg-white/10 border border-white/15 placeholder-white/40 text-white text-sm font-medium focus:border-white/30 transition">
+      </div>
+      <input name="telegram" type="text" placeholder="Ник в Telegram (необязательно)" class="px-5 py-4 rounded-full bg-white/10 border border-white/15 placeholder-white/40 text-white text-sm font-medium focus:border-white/30 transition">
+      <button type="submit" class="mt-2 px-7 py-4 rounded-full bg-white text-ink font-bold tracking-wide hover:scale-[1.02] transition">
+        Записаться на воркшоп
+      </button>
+      <p class="text-xs opacity-50 leading-relaxed">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline hover:opacity-100">политикой обработки персональных данных</a></p>
+    </form>
+
+    <!-- Success state -->
+    <div data-lead-success class="hidden flex-col items-center text-center max-w-lg mx-auto mt-10">
+      <div class="w-20 h-20 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center mb-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Заявка принята</h3>
+      <p class="mt-4 text-base md:text-lg opacity-80 leading-relaxed">Свяжемся в течение дня. Хотите ускорить — напишите нам в Telegram, ваши данные уже в обращении.</p>
+      <a data-tg-link href="https://t.me/DariaAI_marketing" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-ink font-bold hover:scale-[1.02] transition">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.464.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Перейти в Telegram
+      </a>
+      <button data-reset-form class="mt-4 text-xs opacity-50 hover:opacity-80 underline">Отправить ещё одну заявку</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="bg-ink text-white py-10 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm opacity-70">
+    <div class="flex items-center gap-3">
+      <img src="logos/8digital-light.svg" alt="8 Digital" class="h-7 w-auto">
+      <span class="opacity-60">© 2026 8 Digital. Все права защищены.</span>
+    </div>
+    <div class="flex gap-6">
+      <a href="#" class="hover:opacity-100">Политика конфиденциальности</a>
+      <a href="#" class="hover:opacity-100">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============== LEAD FORM HANDLER ==============
+  const TELEGRAM_URL = 'https://t.me/DariaAI_marketing';
+  const WEBHOOK_URL = 'https://primary-production-7202.up.railway.app/webhook/voronezh-lead';
+
+  document.querySelectorAll('form[data-lead-form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const original = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'ОТПРАВЛЯЕМ…'; }
+
+      const data = Object.fromEntries(new FormData(form));
+      const payload = { ...data, source: 'agents-workshop-landing', page_url: location.href, submitted_at: new Date().toISOString() };
+
+      if (WEBHOOK_URL) {
+        try {
+          await fetch(WEBHOOK_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+        } catch(err) { console.error(err); }
+      }
+
+      const tgMessage = encodeURIComponent(
+        `Здравствуйте! Хочу записаться на воркшоп по AI-агентам в Москве.\n\n` +
+        (payload.name     ? `Имя: ${payload.name}\n`         : '') +
+        (payload.phone    ? `Телефон: ${payload.phone}\n`    : '') +
+        (payload.telegram ? `Telegram: ${payload.telegram}\n` : '')
+      );
+
+      const container = form.closest('section') || form.parentElement;
+      const success = container.querySelector('[data-lead-success]');
+      if (success) {
+        const tg = success.querySelector('[data-tg-link]');
+        if (tg) tg.href = `${TELEGRAM_URL}?text=${tgMessage}`;
+        form.classList.add('hidden');
+        const policy = form.parentElement.querySelector('p.text-xs');
+        if (policy) policy.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.classList.add('flex');
+      }
+
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+      form.reset();
+    });
+  });
+
+  document.querySelectorAll('[data-reset-form]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const success = btn.closest('[data-lead-success]');
+      if (!success) return;
+      const container = success.closest('section') || success.parentElement;
+      const form = container.querySelector('form[data-lead-form]');
+      if (form) form.classList.remove('hidden');
+      const policy = form && form.parentElement.querySelector('p.text-xs');
+      if (policy) policy.classList.remove('hidden');
+      success.classList.add('hidden');
+      success.classList.remove('flex');
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

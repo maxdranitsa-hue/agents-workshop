@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" font-family="Inter, sans-serif">
+  <g>
+    <g transform="translate(0,8)">
+      <ellipse cx="22" cy="32" rx="22" ry="22" fill="#E5142A"/>
+      <ellipse cx="58" cy="32" rx="22" ry="22" fill="#E5142A"/>
+      <ellipse cx="22" cy="32" rx="7.5" ry="7.5" fill="#0A0B12"/>
+      <ellipse cx="58" cy="32" rx="7.5" ry="7.5" fill="#0A0B12"/>
+    </g>
+    <text x="100" y="58" font-size="48" font-weight="700" fill="#FFFFFF" letter-spacing="-1.5">Digital</text>
+  </g>
+</svg>
