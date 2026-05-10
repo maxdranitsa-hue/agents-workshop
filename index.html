@@ -39,13 +39,13 @@
 <style>
   html {
     scroll-behavior: smooth;
-    font-size: 13px;
+    font-size: 14px;
   }
   @media (min-width: 1024px) {
-    html { font-size: 13.5px; }
+    html { font-size: 15px; }
   }
   @media (min-width: 1440px) {
-    html { font-size: 14.5px; }
+    html { font-size: 16px; }
   }
   body {
     font-family: 'Manrope', sans-serif;
@@ -314,57 +314,72 @@
   </div>
 </section>
 
-<!-- ============== 3 AGENTS — RESULT ============== -->
-<section id="agents" class="bg-warm py-8 md:py-12 border-y border-line">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+<!-- ============== 3 AGENTS — RESULT (atsyhan-style) ============== -->
+<section id="agents" class="bg-warm py-14 md:py-20 border-y border-line">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="reveal">
-      <span class="tag">Результат · 3 агента</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[28px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
-        Что вы <span class="marker">заберёте</span> вечером
+      <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-mute">
+        <span class="w-8 h-px bg-mute"></span>
+        Результат · 3 агента
+      </div>
+      <h2 class="mt-6 text-3xl md:text-4xl lg:text-[52px] font-bold leading-[1.05] tracking-[-0.03em]">
+        Что вы заберёте вечером
       </h2>
-      <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
+      <p class="mt-4 text-base md:text-lg text-ink2 max-w-3xl">
         Три готовых AI-агента, настроенных под ваши задачи. Запускаются в продакшене со следующего дня.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-5 mt-10">
-      <div class="reveal card">
-        <div class="text-xs font-mono text-mute">01 / 03</div>
-        <div class="mt-3 text-4xl">💬</div>
-        <h3 class="mt-4 text-lg md:text-xl font-bold tracking-tight">AI-агент продаж</h3>
-        <p class="mt-4 text-base text-ink2 leading-relaxed">
-          Сам пишет клиентам, ищет инфу, готовит коммерческие предложения, ведёт лида до сделки.
-        </p>
-        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
-          «Первый агент полностью продал предыдущий воркшоп, пока я был в командировке».
-          <div class="not-italic mt-2 font-semibold text-ink">— Максим Драница</div>
-        </blockquote>
+    <div class="grid md:grid-cols-3 gap-5 mt-12">
+      <!-- Card 1 — Sales -->
+      <div class="reveal bg-white rounded-[20px] border border-line p-7 flex flex-col">
+        <div class="flex items-start justify-between">
+          <div class="text-xs font-mono text-mute tracking-wider">01 / 03</div>
+          <div class="w-10 h-10 rounded-xl bg-warm border border-line flex items-center justify-center text-base">💬</div>
+        </div>
+        <h3 class="mt-5 text-xl md:text-2xl font-bold tracking-tight">AI-агент продаж</h3>
+        <p class="mt-3 text-[15px] text-ink2 leading-snug">Сам пишет клиентам, ищет инфу, готовит коммерческие предложения.</p>
+        <div class="mt-6 rounded-xl p-5" style="background:#1E0F3D;color:#fff;">
+          <p class="text-[15px] font-semibold leading-snug">«Первый агент полностью продал предыдущий воркшоп, пока я был в командировке».</p>
+          <div class="mt-4 text-[10px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Максим Драница</div>
+        </div>
+        <a href="#cta" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold border-b pb-1 self-start" style="color:#7C3AED;border-color:rgba(124,58,237,0.4);">
+          Уточнить у агента →
+        </a>
       </div>
 
-      <div class="reveal reveal-d1 card">
-        <div class="text-xs font-mono text-mute">02 / 03</div>
-        <div class="mt-3 text-4xl">📄</div>
-        <h3 class="mt-4 text-lg md:text-xl font-bold tracking-tight">AI-офис-менеджер</h3>
-        <p class="mt-4 text-base text-ink2 leading-relaxed">
-          Сверните 10 Excel-таблиц в одну сводку. 30-страничный Word-документ и презентацию. Транскрибируйте совещание в структурный документ — одной командой голосом за 10 минут.
-        </p>
-        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
-          «За вечер сделал семь версий презентации. Дизайнер просил 50 000 ₽ только за одну».
-          <div class="not-italic mt-2 font-semibold text-ink">— Влад · собственник медклиники</div>
-        </blockquote>
+      <!-- Card 2 — Office -->
+      <div class="reveal reveal-d1 bg-white rounded-[20px] border border-line p-7 flex flex-col">
+        <div class="flex items-start justify-between">
+          <div class="text-xs font-mono text-mute tracking-wider">02 / 03</div>
+          <div class="w-10 h-10 rounded-xl bg-warm border border-line flex items-center justify-center text-base">📄</div>
+        </div>
+        <h3 class="mt-5 text-xl md:text-2xl font-bold tracking-tight">AI-офис-менеджер</h3>
+        <p class="mt-3 text-[15px] text-ink2 leading-snug">Сверните 10 Excel-таблиц в одну сводку. 30-страничный Word-документ и презентацию. Транскрибируйте совещание — всё одной командой голосом за 10 минут.</p>
+        <div class="mt-6 rounded-xl p-5" style="background:#1E0F3D;color:#fff;">
+          <p class="text-[15px] font-semibold leading-snug">«За вечер сделал семь версий презентации. Дизайнер просил 50 000 ₽ только за одну».</p>
+          <div class="mt-4 text-[10px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Влад · собственник медклиники · участник воркшопа</div>
+        </div>
+        <a href="#cta" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold border-b pb-1 self-start" style="color:#7C3AED;border-color:rgba(124,58,237,0.4);">
+          Узнать все возможности →
+        </a>
       </div>
 
-      <div class="reveal reveal-d2 card">
-        <div class="text-xs font-mono text-mute">03 / 03</div>
-        <div class="mt-3 text-4xl">🪟</div>
-        <h3 class="mt-4 text-lg md:text-xl font-bold tracking-tight">Разработка без кода</h3>
-        <p class="mt-4 text-base text-ink2 leading-relaxed">
-          Готовый сложный технический продукт — внутренняя автоматизация или сервис для клиентов. Без АйТи-команды.
-        </p>
-        <blockquote class="mt-6 pl-4 border-l-2 border-brand text-sm italic text-mute">
-          «Внутренняя CRM для отдела продаж, которую заказывали разработчикам за 2 млн — собрана за день, в продакшене».
-          <div class="not-italic mt-2 font-semibold text-ink">— Кейс 8 Digital</div>
-        </blockquote>
+      <!-- Card 3 — Custom service -->
+      <div class="reveal reveal-d2 bg-white rounded-[20px] border border-line p-7 flex flex-col">
+        <div class="flex items-start justify-between">
+          <div class="text-xs font-mono text-mute tracking-wider">03 / 03</div>
+          <div class="w-10 h-10 rounded-xl bg-warm border border-line flex items-center justify-center text-base">🪟</div>
+        </div>
+        <h3 class="mt-5 text-xl md:text-2xl font-bold tracking-tight">Разработка без кода</h3>
+        <p class="mt-3 text-[15px] text-ink2 leading-snug">Готовый сложный технический продукт — внутренняя автоматизация или сервис для клиентов. Без АйТи-команды.</p>
+        <div class="mt-6 rounded-xl p-5" style="background:#1E0F3D;color:#fff;">
+          <p class="text-[15px] font-semibold leading-snug">«Внутренняя CRM для отдела продаж, которую заказывали разработчикам за 2 млн — собрана за день, в продакшене».</p>
+          <div class="mt-4 text-[10px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Кейс 8 Digital</div>
+        </div>
+        <a href="#cta" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold border-b pb-1 self-start" style="color:#7C3AED;border-color:rgba(124,58,237,0.4);">
+          Узнать про разработку →
+        </a>
       </div>
     </div>
   </div>
