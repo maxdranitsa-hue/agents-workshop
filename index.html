@@ -119,36 +119,36 @@
   .marker-plum::after { background: rgba(138, 87, 245, 0.28); }
   .marker-lime::after { background: rgba(212, 255, 0, 0.55); }
 
-  /* Channel chip (with brand-colored icon) */
+  /* Channel chip — atsyhan-style: bigger icon, larger pill */
   .chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    gap: 0.65rem;
+    padding: 0.4rem 1.1rem 0.4rem 0.4rem;
     border-radius: 9999px;
     background: #ffffff;
     border: 1px solid rgba(10,11,18,0.08);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #0A0B12;
     transition: border-color .2s ease;
   }
   .chip:hover { border-color: rgba(10,11,18,0.20); }
   .chip-icon {
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     border-radius: 9999px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .chip-icon svg, .chip-icon img { width: 16px; height: 16px; }
-  /* Integration badge (small colored circle with letters) */
+  .chip-icon svg, .chip-icon img { width: 18px; height: 18px; }
+  /* Integration badge — SQUARE rounded, like atsyhan */
   .ibadge {
-    width: 32px;
-    height: 32px;
-    border-radius: 9999px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -158,6 +158,15 @@
     flex-shrink: 0;
     letter-spacing: -0.02em;
   }
+  /* Compact info card for B2B/B2C/B2G */
+  .info-card {
+    background: #ffffff;
+    border: 1px solid rgba(10,11,18,0.08);
+    border-radius: 18px;
+    padding: 22px 24px;
+  }
+  /* Solid violet accent for "Лид" — like atsyhan's "Ромул" */
+  .accent-violet { color: #7C3AED; }
 
   /* Faux-chat for sales agent demo */
   .chat {
@@ -357,29 +366,29 @@
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">AI-агент №1 · продажи</span>
-      <h2 class="mt-6 text-3xl md:text-4xl lg:text-[40px] font-bold leading-[1.08] tracking-[-0.025em] max-w-3xl">
-        AI-агент продаж — <span class="marker marker-plum">Лид</span>
+      <h2 class="mt-5 text-2xl md:text-3xl lg:text-[40px] font-bold leading-[1.08] tracking-[-0.025em] max-w-3xl">
+        AI-агент продаж — <span class="accent-violet">Лид</span>
       </h2>
-      <p class="mt-5 text-base md:text-lg text-ink2 max-w-2xl">
+      <p class="mt-4 text-sm md:text-base text-ink2 max-w-2xl">
         Это наш AI-агент-продавец. Работает в реальном продакшене — мы ему доверяем сделки. Можете протестировать прямо сейчас — он расскажет о воркшопе и о цене.
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-[1fr_440px] gap-10 mt-12 items-start">
+    <div class="grid lg:grid-cols-[1fr_400px] gap-8 mt-8 items-start">
       <!-- Capabilities -->
-      <div class="reveal flex flex-col gap-7">
+      <div class="reveal flex flex-col gap-5">
         <div class="grid sm:grid-cols-3 gap-3">
-          <div class="card !p-5">
-            <div class="text-xl font-bold tracking-tight">B2B</div>
-            <p class="mt-2 text-sm text-mute leading-relaxed">по базе товаров, готовит персональное КП</p>
+          <div class="info-card">
+            <div class="text-xl md:text-2xl font-bold tracking-tight">B2B</div>
+            <p class="mt-1.5 text-[13px] text-mute leading-snug">по базе товаров, готовит персональное КП</p>
           </div>
-          <div class="card !p-5">
-            <div class="text-xl font-bold tracking-tight">B2C</div>
-            <p class="mt-2 text-sm text-mute leading-relaxed">общается в директе и боте, ведёт до продажи</p>
+          <div class="info-card">
+            <div class="text-xl md:text-2xl font-bold tracking-tight">B2C</div>
+            <p class="mt-1.5 text-[13px] text-mute leading-snug">общается в директе и боте, ведёт до продажи</p>
           </div>
-          <div class="card !p-5">
-            <div class="text-xl font-bold tracking-tight">B2G</div>
-            <p class="mt-2 text-sm text-mute leading-relaxed">скорит тендеры, помогает с документами</p>
+          <div class="info-card">
+            <div class="text-xl md:text-2xl font-bold tracking-tight">B2G</div>
+            <p class="mt-1.5 text-[13px] text-mute leading-snug">скорит тендеры, помогает с документами</p>
           </div>
         </div>
 
@@ -407,19 +416,19 @@
           </div>
         </div>
 
-        <!-- Big number — dark with lime accent -->
-        <div class="rounded-2xl bg-ink text-white p-7 flex flex-col sm:flex-row sm:items-center gap-4">
-          <div class="text-3xl md:text-4xl font-bold tracking-tight num" style="color:#D4FF00;">2 500 000+ ₽</div>
-          <p class="text-sm md:text-base text-white/80 sm:max-w-xs">за полгода работы — живых денег на счёт от AI-агента</p>
+        <!-- Big number — dark with lime accent (atsyhan-style: huge lime number) -->
+        <div class="rounded-2xl bg-ink text-white px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div class="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight num leading-none" style="color:#D4FF00;">2 500 000+ ₽</div>
+          <p class="text-[13px] md:text-sm text-white/75 sm:max-w-[200px] leading-snug">за полгода работы — живых денег на счёт от AI-агента</p>
         </div>
 
-        <!-- Quote — plum card with lime caption -->
-        <div class="rounded-2xl p-7 relative overflow-hidden" style="background:#1E0F3D;color:#fff;">
-          <div class="text-6xl absolute top-3 left-5 leading-none" style="color:rgba(212,255,0,0.45);">&ldquo;</div>
-          <p class="relative pt-6 text-base md:text-lg font-bold leading-snug max-w-xl">
+        <!-- Quote — plum card with lime caption (compact) -->
+        <div class="rounded-2xl p-6 relative overflow-hidden" style="background:#1E0F3D;color:#fff;">
+          <div class="text-5xl absolute top-2 left-4 leading-none font-serif" style="color:rgba(212,255,0,0.40);">&ldquo;</div>
+          <p class="relative pt-4 pl-2 text-base md:text-lg font-bold leading-snug max-w-xl">
             Первый Лид полностью продал предыдущий воркшоп, пока я был в командировке.
           </p>
-          <div class="relative mt-5 text-[11px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Максим Драница · флагман-кейс</div>
+          <div class="relative mt-4 pl-2 text-[11px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Максим Драница · флагман-кейс</div>
         </div>
       </div>
 
