@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -47,6 +47,11 @@
   @media (min-width: 1440px) {
     html { font-size: 16px; }
   }
+  /* Heavier weights for headings — match atsyhan visual */
+  h1, h2, h3, h4, .font-bold { font-weight: 800 !important; letter-spacing: -0.035em; }
+  .font-semibold { font-weight: 700 !important; }
+  .font-medium { font-weight: 500 !important; }
+
   body {
     font-family: 'Manrope', sans-serif;
     -webkit-font-smoothing: antialiased;
