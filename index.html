@@ -37,7 +37,16 @@
 </script>
 
 <style>
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    font-size: 14px;
+  }
+  @media (min-width: 1024px) {
+    html { font-size: 15px; }
+  }
+  @media (min-width: 1440px) {
+    html { font-size: 16px; }
+  }
   body {
     font-family: 'Manrope', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -227,7 +236,7 @@
 
 <!-- ============== TOP NAV ============== -->
 <header class="border-b border-line bg-paper/80 backdrop-blur-md sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
     <a href="#" class="flex items-center">
       <img src="logos/8digital-dark.svg" alt="8 Digital" class="h-7 w-auto">
     </a>
@@ -247,14 +256,14 @@
 <section class="relative overflow-hidden">
   <div class="absolute inset-0 dot-bg opacity-50 pointer-events-none" style="-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 30%,transparent 80%);"></div>
 
-  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 pb-12">
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 pb-12">
     <div class="reveal">
       <span class="tag mb-8">
         <span class="tag-dot"></span>
         Автоматизация бизнеса через AI-агентов · Москва · Офлайн
       </span>
 
-      <h1 class="mt-8 text-[36px] xs:text-[44px] md:text-[60px] lg:text-[80px] font-bold leading-[0.96] tracking-[-0.04em] max-w-5xl">
+      <h1 class="mt-8 text-[36px] xs:text-[44px] md:text-[60px] lg:text-[68px] font-bold leading-[0.96] tracking-[-0.04em] max-w-5xl">
         День практики.<br>
         Автоматизация бизнеса<br>
         через <span class="marker">AI-агентов</span>
@@ -306,11 +315,11 @@
 </section>
 
 <!-- ============== 3 AGENTS — RESULT ============== -->
-<section id="agents" class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section id="agents" class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Результат · 3 агента</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Что вы <span class="marker">заберёте</span> вечером
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
@@ -362,11 +371,11 @@
 </section>
 
 <!-- ============== AGENT 1 — SALES (with chat demo) ============== -->
-<section class="py-14 md:py-20">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">AI-агент №1 · продажи</span>
-      <h2 class="mt-5 text-2xl md:text-3xl lg:text-[40px] font-bold leading-[1.08] tracking-[-0.025em] max-w-3xl">
+      <h2 class="mt-5 text-2xl md:text-3xl lg:text-[34px] font-bold leading-[1.08] tracking-[-0.025em] max-w-3xl">
         AI-агент продаж — <span class="accent-violet">Лид</span>
       </h2>
       <p class="mt-4 text-sm md:text-base text-ink2 max-w-2xl">
@@ -468,11 +477,11 @@
 </section>
 
 <!-- ============== AGENT 2 — OFFICE ============== -->
-<section class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">AI-агент №2 · офис</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         AI-офис-менеджер
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
@@ -529,11 +538,11 @@
 </section>
 
 <!-- ============== AGENT 3 — CUSTOM SERVICE ============== -->
-<section class="py-14 md:py-20">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">AI-агент №3 · сервис</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Готовый <span class="marker">сервис</span> под вашу задачу
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
@@ -592,11 +601,11 @@
 </section>
 
 <!-- ============== BARRIERS ============== -->
-<section class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Боль · честно</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Почему автоматизация<br>не работает <span class="marker">сейчас</span>
       </h2>
     </div>
@@ -631,11 +640,11 @@
 </section>
 
 <!-- ============== DAY MAP ============== -->
-<section id="program" class="py-14 md:py-20">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section id="program" class="py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Карта дня · 10:00–20:00</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Карта дня воркшопа
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
@@ -681,11 +690,11 @@
 </section>
 
 <!-- ============== HOW IT GOES ============== -->
-<section class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Как проходит день</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Как проходит день в зале
       </h2>
     </div>
@@ -716,11 +725,11 @@
 </section>
 
 <!-- ============== TESTIMONIALS ============== -->
-<section class="py-14 md:py-20">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Голоса · 6 выпускников</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Что говорят выпускники
       </h2>
     </div>
@@ -761,11 +770,11 @@
 </section>
 
 <!-- ============== INDUSTRIES ============== -->
-<section class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Подходит · 6 индустрий</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Подходит вашему бизнесу
       </h2>
     </div>
@@ -782,7 +791,7 @@
 </section>
 
 <!-- ============== SPEAKER ============== -->
-<section id="speaker" class="py-14 md:py-20">
+<section id="speaker" class="py-10 md:py-16">
   <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Кто ведёт · solo</span>
@@ -827,11 +836,11 @@
 </section>
 
 <!-- ============== PRICING ============== -->
-<section id="pricing" class="bg-warm py-14 md:py-20 border-y border-line">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+<section id="pricing" class="bg-warm py-10 md:py-16 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Тарифы · 2 уровня</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
         Тарифы
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2 max-w-3xl">
@@ -893,11 +902,11 @@
 </section>
 
 <!-- ============== FAQ ============== -->
-<section class="py-14 md:py-20">
+<section class="py-10 md:py-16">
   <div class="max-w-4xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">Честные ответы</span>
-      <h2 class="mt-6 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.05] tracking-[-0.03em]">
+      <h2 class="mt-6 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.05] tracking-[-0.03em]">
         Честные ответы
       </h2>
       <p class="mt-6 text-base md:text-lg text-ink2">Без маркетингового пафоса. Что вы реально получите, а что — нет.</p>
@@ -951,7 +960,7 @@
 </section>
 
 <!-- ============== FINAL CTA ============== -->
-<section id="cta" class="relative bg-ink text-white py-14 md:py-20 overflow-hidden">
+<section id="cta" class="relative bg-ink text-white py-10 md:py-16 overflow-hidden">
   <div class="absolute inset-0 dot-bg opacity-20 pointer-events-none" style="background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.18) 1px,transparent 1.5px);"></div>
 
   <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center reveal">
@@ -960,7 +969,7 @@
       20 мест · Москва · Дата уточняется
     </span>
 
-    <h2 class="mt-8 text-xl md:text-2xl lg:text-[40px] font-bold leading-[1.04] tracking-[-0.03em]">
+    <h2 class="mt-8 text-xl md:text-2xl lg:text-[34px] font-bold leading-[1.04] tracking-[-0.03em]">
       К вечеру у вас в&nbsp;ноутбуке —<br>
       <span class="opacity-60">три рабочих AI-агента</span>
     </h2>
@@ -997,7 +1006,7 @@
 
 <!-- ============== FOOTER ============== -->
 <footer class="bg-ink text-white py-10 border-t border-white/10">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm opacity-70">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm opacity-70">
     <div class="flex items-center gap-3">
       <img src="logos/8digital-light.svg" alt="8 Digital" class="h-7 w-auto">
       <span class="opacity-60">© 2026 8 Digital. Все права защищены.</span>
