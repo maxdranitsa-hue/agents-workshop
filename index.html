@@ -27,6 +27,9 @@
           line:  'rgba(10,11,18,0.08)',
           brand: '#E5142A',
           accent:'#0A0B12',
+          plum:  '#1E0F3D',
+          plum2: '#2A1455',
+          lime:  '#D4FF00',
         },
       }
     }
@@ -109,6 +112,48 @@
     background: rgba(229,20,42,0.18);
     z-index: -1;
     border-radius: 4px;
+  }
+  .marker-plum::after { background: rgba(138, 87, 245, 0.28); }
+  .marker-lime::after { background: rgba(212, 255, 0, 0.55); }
+
+  /* Channel chip (with brand-colored icon) */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1px solid rgba(10,11,18,0.08);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0A0B12;
+    transition: border-color .2s ease;
+  }
+  .chip:hover { border-color: rgba(10,11,18,0.20); }
+  .chip-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .chip-icon svg, .chip-icon img { width: 16px; height: 16px; }
+  /* Integration badge (small colored circle with letters) */
+  .ibadge {
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 11px;
+    color: #ffffff;
+    flex-shrink: 0;
+    letter-spacing: -0.02em;
   }
 
   /* Faux-chat for sales agent demo */
@@ -305,63 +350,73 @@
 </section>
 
 <!-- ============== AGENT 1 — SALES (with chat demo) ============== -->
-<section class="py-24 md:py-32">
+<section class="py-20 md:py-28">
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="reveal">
       <span class="tag">AI-агент №1 · продажи</span>
-      <h2 class="mt-6 text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.05] tracking-[-0.03em] max-w-4xl">
-        AI-агент продаж — <span class="marker">Лид</span>
+      <h2 class="mt-6 text-3xl md:text-4xl lg:text-[48px] font-bold leading-[1.08] tracking-[-0.025em] max-w-3xl">
+        AI-агент продаж — <span class="marker marker-plum">Лид</span>
       </h2>
-      <p class="mt-6 text-lg md:text-xl text-ink2 max-w-3xl">
+      <p class="mt-5 text-base md:text-lg text-ink2 max-w-2xl">
         Это наш AI-агент-продавец. Работает в реальном продакшене — мы ему доверяем сделки. Можете протестировать прямо сейчас — он расскажет о воркшопе и о цене.
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-[1fr_460px] gap-12 mt-14 items-start">
+    <div class="grid lg:grid-cols-[1fr_440px] gap-10 mt-12 items-start">
       <!-- Capabilities -->
-      <div class="reveal flex flex-col gap-8">
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div class="card">
-            <div class="text-2xl font-bold tracking-tight">B2B</div>
+      <div class="reveal flex flex-col gap-7">
+        <div class="grid sm:grid-cols-3 gap-3">
+          <div class="card !p-5">
+            <div class="text-xl font-bold tracking-tight">B2B</div>
             <p class="mt-2 text-sm text-mute leading-relaxed">по базе товаров, готовит персональное КП</p>
           </div>
-          <div class="card">
-            <div class="text-2xl font-bold tracking-tight">B2C</div>
+          <div class="card !p-5">
+            <div class="text-xl font-bold tracking-tight">B2C</div>
             <p class="mt-2 text-sm text-mute leading-relaxed">общается в директе и боте, ведёт до продажи</p>
           </div>
-          <div class="card">
-            <div class="text-2xl font-bold tracking-tight">B2G</div>
+          <div class="card !p-5">
+            <div class="text-xl font-bold tracking-tight">B2G</div>
             <p class="mt-2 text-sm text-mute leading-relaxed">скорит тендеры, помогает с документами</p>
           </div>
         </div>
 
         <div>
-          <div class="text-xs uppercase tracking-widest text-mute font-semibold mb-4">Каналы</div>
+          <div class="text-[11px] uppercase tracking-widest text-mute font-bold mb-3">Каналы</div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Telegram</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Instagram</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">WhatsApp</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">VK</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Email</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Сайт</span>
+            <span class="chip"><span class="chip-icon" style="background:#229ED9;"><img src="logos/ch-telegram.svg" alt="" style="filter:brightness(0) invert(1);"></span>Telegram</span>
+            <span class="chip"><span class="chip-icon" style="background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);"><img src="logos/ch-instagram.svg" alt="" style="filter:brightness(0) invert(1);"></span>Instagram</span>
+            <span class="chip"><span class="chip-icon" style="background:#25D366;"><img src="logos/ch-whatsapp.svg" alt="" style="filter:brightness(0) invert(1);"></span>WhatsApp</span>
+            <span class="chip"><span class="chip-icon" style="background:#7360F2;"><img src="logos/ch-viber.svg" alt="" style="filter:brightness(0) invert(1);"></span>Viber</span>
+            <span class="chip"><span class="chip-icon" style="background:#0077FF;"><img src="logos/ch-vk.svg" alt="" style="filter:brightness(0) invert(1);"></span>VK</span>
+            <span class="chip"><span class="chip-icon" style="background:#EA4335;"><img src="logos/ch-gmail.svg" alt="" style="filter:brightness(0) invert(1);"></span>Email</span>
           </div>
         </div>
 
         <div>
-          <div class="text-xs uppercase tracking-widest text-mute font-semibold mb-4">Возможные интеграции</div>
+          <div class="text-[11px] uppercase tracking-widest text-mute font-bold mb-3">Возможные интеграции</div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">1С</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Bitrix24</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">amoCRM</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">YCLIENTS</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">GetCourse</span>
-            <span class="px-4 py-2 rounded-full bg-warm border border-line text-sm font-medium">Tilda</span>
+            <span class="chip"><span class="ibadge" style="background:#FFCB05;color:#0A0B12;">1С</span>1С</span>
+            <span class="chip"><span class="ibadge" style="background:#2FC6F6;">B24</span>Bitrix24</span>
+            <span class="chip"><span class="ibadge" style="background:#0F172A;">amo</span>amoCRM</span>
+            <span class="chip"><span class="ibadge" style="background:#2DBE60;">YC</span>YCLIENTS</span>
+            <span class="chip"><span class="ibadge" style="background:#FF6B35;">GC</span>GetCourse</span>
+            <span class="chip"><span class="ibadge" style="background:#FFC700;color:#0A0B12;">Td</span>Tilda</span>
           </div>
         </div>
 
-        <div class="card border-brand/30">
-          <div class="text-4xl md:text-5xl font-bold tracking-tight num">2 500 000+ ₽</div>
-          <p class="mt-2 text-base text-ink2">за полгода работы — выручки на счёт от AI-агента</p>
+        <!-- Big number — dark with lime accent -->
+        <div class="rounded-2xl bg-ink text-white p-7 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="text-4xl md:text-5xl font-bold tracking-tight num" style="color:#D4FF00;">2 500 000+ ₽</div>
+          <p class="text-sm md:text-base text-white/80 sm:max-w-xs">за полгода работы — живых денег на счёт от AI-агента</p>
+        </div>
+
+        <!-- Quote — plum card with lime caption -->
+        <div class="rounded-2xl p-7 relative overflow-hidden" style="background:#1E0F3D;color:#fff;">
+          <div class="text-6xl absolute top-3 left-5 leading-none" style="color:rgba(212,255,0,0.45);">&ldquo;</div>
+          <p class="relative pt-6 text-lg md:text-xl font-bold leading-snug max-w-xl">
+            Первый Лид полностью продал предыдущий воркшоп, пока я был в командировке.
+          </p>
+          <div class="relative mt-5 text-[11px] tracking-widest uppercase font-bold" style="color:#D4FF00;">— Максим Драница · флагман-кейс</div>
         </div>
       </div>
 
@@ -369,7 +424,7 @@
       <div class="reveal reveal-d2 chat">
         <div class="flex items-center gap-3 pb-4 border-b border-line">
           <div class="w-10 h-10 rounded-full bg-gradient-to-br from-ink to-ink2 flex items-center justify-center text-white font-bold">Л</div>
-          <div>
+          <div class="flex-1">
             <div class="font-semibold text-sm">Лид · AI-агент</div>
             <div class="text-xs text-mute">@leadagent_8digital_bot · <span class="text-emerald-600">Онлайн</span></div>
           </div>
@@ -392,7 +447,7 @@
 
         <div class="pt-4 border-t border-line flex items-center gap-2">
           <input type="text" placeholder="Напишите сообщение…" disabled class="flex-1 px-4 py-2.5 rounded-full bg-warm border border-line text-sm placeholder-mute" />
-          <button class="w-10 h-10 rounded-full bg-ink text-white text-lg font-bold">↑</button>
+          <button class="w-10 h-10 rounded-full text-white text-lg font-bold" style="background:#1E0F3D;">↑</button>
         </div>
         <p class="mt-3 text-xs text-mute text-center">Это демо. Реальный агент собирается на воркшопе.</p>
       </div>
